@@ -48,7 +48,7 @@
     $.getScript( "js/model/player.js" )
       .done(function( script, textStatus ) {
         console.log( "Script loaded: " + textStatus );
-        nivelPorExperiencia();
+        player.nivelPorExperiencia();
       })
       .fail(function( jqxhr, settings, exception ) {
         console.log( "Script load fail: " + exception );
