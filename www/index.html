@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<link>
+<meta charset="utf-8">
+<meta name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css"/>
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.css"/>
+<link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.css"/>
+<link rel="stylesheet" href="index.css"/>
+<script src="js/jquery-1.11.1.js"></script>
+<script src="js/jquery.mobile-1.4.5.js "></script>
+<script src="index.js"></script>
+<noscript id="grunticon-fallback">
+    <link rel="stylesheet" href="css/jquery.mobile.icons-1.4.5.css"/>
+</noscript>
+<title>Blank App</title>
+</head>
+<body>
+<div data-role="page" id="pageone">
+    <div data-role="header">
+        <h1>Welcome To My Homepage</h1>
+        <a href="#" data-icon="gear" class="ui-btn-right">Options</a>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#">A</a></li>
+                <li><a href="#">B</a></li>
+                <li><a href="#">C</a></li>
+                <li><a href="#">D</a></li>
+                <li><a href="#">F</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <div data-role="main" class="ui-content">
+        <p>Welcome! If you click on the link below, it will take you to Page Two.</p>
+        <a href="#pagetwo">Go to Page Two</a>
+    </div>
+    <div data-role="footer">
+        <h1>Footer Text</h1>
+    </div>
+</div>
+
+<div data-role="page" id="pagetwo">
+    <div data-role="header">
+        <h1>Welcome To My Homepage</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <p>This is Page Two. If you click on the link below, it will take you to Page One.</p>
+        <a href="#pageone">Go to Page One</a>
+    </div>
+    <div data-role="footer">
+        <h1>Footer Text</h1>
+    </div>
+</div>
+<script type="text/javascript" src="cordova.js"></script>
+</body>
+</html>
