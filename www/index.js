@@ -36,6 +36,10 @@
         // function, we must explicitly call 'app.receivedEvent(...);'
         onDeviceReady: function() {
             console.log('deviceready');
+            player.pontosDeExperiencia = 300;
+            console.log('Proficiencia: ' + player.proficiencia());
+            console.log('Nível: ' + player.nivel());
+
         }
     };
 
@@ -45,13 +49,21 @@
     // Point to style sheet locations
     grunticon( [ "css/jquery.mobile.inline-svg-1.4.5.css","css/jquery.mobile.inline-png-1.4.5.css","css/jquery.mobile.external-png-1.4.5.css" ] );
 
+
+    $.getScript( "js/model/domains.js" )
+          .done(function( script, textStatus ) {
+            console.log( script + " loaded: " + textStatus );
+          })
+          .fail(function( jqxhr, settings, exception ) {
+            console.log( script + " load fail: " + exception );
+          });
+
     $.getScript( "js/model/player.js" )
       .done(function( script, textStatus ) {
-        console.log( "Script loaded: " + textStatus );
-        player.nivelPorExperiencia();
+        console.log( script + " loaded: " + textStatus );
       })
       .fail(function( jqxhr, settings, exception ) {
-        console.log( "Script load fail: " + exception );
-    });
+        console.log( script + " load fail: " + exception );
+        });
     app.initialize();
 });
