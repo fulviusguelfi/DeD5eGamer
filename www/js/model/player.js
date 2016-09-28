@@ -52,3 +52,17 @@ function nivelProficienciaPorExperiencia( experiencia = 0 ){
 function modificadorPorAtributo ( atributo = 0){
     return Math.floor( ( (atributo - 10) /2 ) ) ;
 };
+
+function showPlayer (player) {
+    console.log('ID: ' + player.getId);
+    console.log('Nome: ' + player.nome);
+    console.log('Proficiencia: ' + player.proficiencia());
+    console.log('Nível: ' + player.nivel());
+    console.log('Força: ' + player.forca + ' Mod Força: ' + player.modForca());
+    console.log('Destreza: ' + player.destreza + ' Mod Destreza: ' + player.modDestreza());
+    console.log('Cosntituição: ' + player.constituicao + ' Mod Cosntituição: ' + player.modConstituicao());
+    console.log('Inteligência: ' + player.inteligencia + ' Mod Inteligência: ' + player.modInteligencia());
+    console.log('Sabedoria: ' + player.sabedoria + ' Mod Sabedoria: ' + player.modSabedoria());
+    console.log('Carisma: ' + player.carisma + ' Mod Carisma: ' + player.modCarisma());
+    console.log('------------------------------------------------------------------------');
+};
