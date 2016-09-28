@@ -38,10 +38,12 @@
             console.log('deviceready');
             var player = new Player('teste', 299, 43, 17, 21, 4, 2, 1);
             dados.add(player);
-            palyer = dados.addPlayer('teste1', 300, 18, 17, 10, 12, 11, 8);
+            player = dados.addPlayer('teste1', 300, 18, 17, 10, 12, 11, 8);
+            showPlayers();
+            player.pontosDeExperiencia = 901;
+            dados.update(player);
             showPlayers();
             dados.remove(player);
-            dados.load();
             showPlayers();
         }
     };
@@ -78,3 +80,23 @@
         });
     app.initialize();
 });
+
+function showPlayer (player) {
+    console.log('ID: ' + player.getId);
+    console.log('Nome: ' + player.nome);
+    console.log('Proficiencia: ' + player.proficiencia());
+    console.log('Nível: ' + player.nivel());
+    console.log('Força: ' + player.forca + ' Mod Força: ' + player.modForca());
+    console.log('Destreza: ' + player.destreza + ' Mod Destreza: ' + player.modDestreza());
+    console.log('Cosntituição: ' + player.constituicao + ' Mod Cosntituição: ' + player.modConstituicao());
+    console.log('Inteligência: ' + player.inteligencia + ' Mod Inteligência: ' + player.modInteligencia());
+    console.log('Sabedoria: ' + player.sabedoria + ' Mod Sabedoria: ' + player.modSabedoria());
+    console.log('Carisma: ' + player.carisma + ' Mod Carisma: ' + player.modCarisma());
+    console.log('------------------------------------------------------------------------');
+}
+
+function showPlayers () {
+    $.each(dados.players, function(index, value){
+        showPlayer(value);
+    });
+}

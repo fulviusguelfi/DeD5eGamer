@@ -21,7 +21,7 @@ var dados = {
         if (updated){
             dados.save();
         }else{
-            console.log('Player id: ' + player.getId + ' name: ' + palyer.nome + ' não foi encontrado nos dados locais');
+            console.log('Player id: ' + player.getId + ' name: ' + player.nome + ' não foi encontrado nos dados locais');
         }
     },
     remove: function(player){
@@ -40,9 +40,3 @@ var dados = {
         return dados.players;
     }
 };
-
-function showPlayers () {
-    $.each(dados.players, function(index, value){
-        showPlayer(value);
-    });
-}
