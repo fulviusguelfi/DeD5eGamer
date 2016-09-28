@@ -42,6 +42,10 @@
             player = new Player('teste1', 300, 18, 17, 10, 12, 11, 8);
             showPlayer(player);
             dados.create(player);
+            dados.save();
+            dados.remove(player);
+            dados.load();
+            console.log(dados.players);
         }
     };
 
