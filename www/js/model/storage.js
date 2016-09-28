@@ -1,7 +1,7 @@
 var dados = {
     players: [],
-    add: function (nome = '', pontosDeExperiencia = 0, forca = 0, destreza = 0, constituicao = 0, inteligencia = 0, sabedoria = 0, carisma = 0){
-        var player = new Player(nome, pontosDeExperiencia, forca, destreza, constituicao, inteligencia, sabedoria);
+    addPlayer: function (nome, pontosDeExperiencia, forca, destreza, constituicao, inteligencia, sabedoria, carisma){
+        var player = new Player(nome, pontosDeExperiencia, forca, destreza, constituicao, inteligencia, sabedoria, carisma);
         dados.add(player);
         return player
     },
@@ -38,11 +38,11 @@ var dados = {
     load: function(){
         dados.players = JSON.parse(window.localStorage.getItem('palyers'));
         return dados.players;
-    },
+    }
 };
 
 function showPlayers () {
     $.each(dados.players, function(index, value){
         showPlayer(value);
-    }
-};
+    });
+}

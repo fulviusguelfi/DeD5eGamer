@@ -38,7 +38,7 @@
             console.log('deviceready');
             var player = new Player('teste', 299, 43, 17, 21, 4, 2, 1);
             dados.add(player);
-            palyer = dados.add('teste1', 300, 18, 17, 10, 12, 11, 8);
+            palyer = dados.addPlayer('teste1', 300, 18, 17, 10, 12, 11, 8);
             showPlayers();
             dados.remove(player);
             dados.load();
