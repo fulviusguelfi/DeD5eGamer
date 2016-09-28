@@ -36,11 +36,27 @@
         // function, we must explicitly call 'app.receivedEvent(...);'
         onDeviceReady: function() {
             console.log('deviceready');
-            player.pontosDeExperiencia = 300;
-            console.log('Proficiencia: ' + player.proficiencia());
-            console.log('Nível: ' + player.nivel());
-
+            var player = new Player('teste', 299, 43, 17, 21, 4, 2, 1);
+            showPlayer(player);
+            dados.create(player);
+            player = new Player('teste1', 300, 18, 17, 10, 12, 11, 8);
+            showPlayer(player);
+            dados.create(player);
         }
+    };
+
+    function showPlayer (player) {
+        console.log('ID: ' + player.getId);
+        console.log('Nome: ' + player.nome);
+        console.log('Proficiencia: ' + player.proficiencia());
+        console.log('Nível: ' + player.nivel());
+        console.log('Força: ' + player.forca + ' Mod Força: ' + player.modForca());
+        console.log('Destreza: ' + player.destreza + ' Mod Destreza: ' + player.modDestreza());
+        console.log('Cosntituição: ' + player.constituicao + ' Mod Cosntituição: ' + player.modConstituicao());
+        console.log('Inteligência: ' + player.inteligencia + ' Mod Inteligência: ' + player.modInteligencia());
+        console.log('Sabedoria: ' + player.sabedoria + ' Mod Sabedoria: ' + player.modSabedoria());
+        console.log('Carisma: ' + player.carisma + ' Mod Carisma: ' + player.modCarisma());
+        console.log('------------------------------------------------------------------------');
     };
 
     /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
@@ -51,6 +67,14 @@
 
 
     $.getScript( "js/model/domains.js" )
+          .done(function( script, textStatus ) {
+            console.log( script + " loaded: " + textStatus );
+          })
+          .fail(function( jqxhr, settings, exception ) {
+            console.log( script + " load fail: " + exception );
+          });
+
+    $.getScript( "js/model/storage.js" )
           .done(function( script, textStatus ) {
             console.log( script + " loaded: " + textStatus );
           })
