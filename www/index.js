@@ -45,6 +45,9 @@
             showPlayers();
             dados.remove(player);
             showPlayers();
+            $.each( dados.players, function( key, value ) {
+                $('#playerList').append('<li>').append('<a>').append(value.nome);
+            });
         }
     };
 

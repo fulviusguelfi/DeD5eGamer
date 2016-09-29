@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<head>
 <link>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -35,6 +36,7 @@
     <div data-role="main" class="ui-content">
         <p>Welcome! If you click on the link below, it will take you to Page Two.</p>
         <a href="#pagetwo">Go to Page Two</a>
+        <a href="#listPlayers">Go to listPalyers</a>
     </div>
     <div data-role="footer">
         <h1>Footer Text</h1>
@@ -51,6 +53,14 @@
     </div>
     <div data-role="footer">
         <h1>Footer Text</h1>
+    </div>
+</div>
+
+<div data-role="page" id="listPlayers">
+    <div role="main" class="ui-content">
+        <ul data-role="listview" id="playerList">
+        </ul>
+        <a href="#pageone">Go to Page One</a>
     </div>
 </div>
 <script type="text/javascript" src="cordova.js"></script>
