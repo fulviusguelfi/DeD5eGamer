@@ -13,7 +13,7 @@ function Player (nome, pontosDeExperiencia, forca, destreza, constituicao, intel
     this.proficiencia = function(){
         return nivelProficienciaPorExperiencia( this.pontosDeExperiencia ).proficiencia;
     };
-    this.forca = forca
+    this.forca = forca;
     this.destreza = destreza;
     this.constituicao = constituicao;
     this.inteligencia = inteligencia;
