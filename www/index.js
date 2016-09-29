@@ -19,15 +19,7 @@
 // A $( document ).ready() block.
 $(document).ready(function () {
     //prepare scripts
-    $.getScript("js/jsonfn.js")
-        .done(function (script, textStatus) {
-            console.log(script + " loaded: " + textStatus);
-        })
-        .fail(function (jqxhr, settings, exception) {
-            console.log(script + " load fail: " + exception);
-        });
-
-    $.getScript("js/model/domains.js")
+    /*$.getScript("js/model/domains.js")
         .done(function (script, textStatus) {
             console.log(script + " loaded: " + textStatus);
         })
@@ -57,7 +49,7 @@ $(document).ready(function () {
         })
         .fail(function (jqxhr, settings, exception) {
             console.log(script + " load fail: " + exception);
-        });
+        });*/
 
     var app = {
         // Application Constructor
@@ -77,62 +69,15 @@ $(document).ready(function () {
         // function, we must explicitly call 'app.receivedEvent(...);'
         onDeviceReady: function () {
             console.log('deviceready');
-            var player = new Player('teste', 299, 43, 17, 21, 4, 2, 1);
-            dados.add(player);
-            player = dados.addPlayer('teste1', 300, 18, 17, 10, 12, 11, 8);
-            showPlayers();
-            player.pontosDeExperiencia = 901;
-            dados.update(player);
-            showPlayers();
-            dados.remove(player);
-            showPlayers()
-            listaPlayers('#playerList');
+            var player1 = DED5EGAMER.model.savePlayer(new DED5EGAMER.model.Player('teste', 299, 43, 17, 21, 4, 2, 1));
+            var player2 = DED5EGAMER.model.savePlayer(new DED5EGAMER.model.Player('teste1', 300, 18, 17, 10, 12, 11, 8));
+            player1.pontosDeExperiencia = 901;
+            DED5EGAMER.model.savePlayer(player1);
+            DED5EGAMER.view.listarPlayers(DED5EGAMER.model.players,'#playerList');
 
 
         }
     };
-
-    /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
-    // Selects the correct stylesheet based on feature detects
-    window.grunticon = function (e) {
-        if (e && 3 === e.length) {
-            var t = window, n = !(!t.document.createElementNS || !t.document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect || !document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1") || window.opera && -1 === navigator.userAgent.indexOf("Chrome")), o = function (o) {
-                var r = t.document.createElement("link"), a = t.document.getElementsByTagName("script")[0];
-                r.rel = "stylesheet", r.href = e[o && n ? 0 : o ? 1 : 2], a.parentNode.insertBefore(r, a)
-            }, r = new t.Image;
-            r.onerror = function () {
-                o(!1)
-            }, r.onload = function () {
-                o(1 === r.width && 1 === r.height)
-            }, r.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-        }
-    };
-    // Point to style sheet locations
-    grunticon(["css/jquery.mobile.inline-svg-1.4.5.css", "css/jquery.mobile.inline-png-1.4.5.css", "css/jquery.mobile.external-png-1.4.5.css"]);
 
     app.initialize();
 });
-
-function showPlayer(player) {
-    console.log('ID: ' + player.getId);
-    console.log('Nome: ' + player.nome);
-    console.log('Proficiencia: ' + player.proficiencia());
-    console.log('Nível: ' + player.nivel());
-    console.log('Força: ' + player.forca + ' Mod Força: ' + player.modForca());
-    console.log('Destreza: ' + player.destreza + ' Mod Destreza: ' + player.modDestreza());
-    console.log('Cosntituição: ' + player.constituicao + ' Mod Cosntituição: ' + player.modConstituicao());
-    console.log('Inteligência: ' + player.inteligencia + ' Mod Inteligência: ' + player.modInteligencia());
-    console.log('Sabedoria: ' + player.sabedoria + ' Mod Sabedoria: ' + player.modSabedoria());
-    console.log('Carisma: ' + player.carisma + ' Mod Carisma: ' + player.modCarisma());
-    console.log('------------------------------------------------------------------------');
-}
-
-function showPlayers() {
-    $.each(dados.players, function (index, value) {
-        showPlayer(value);
-    });
-}
-
-function uniqueId(){
-    return new Date().getTime() + ((Math.random() * new Date().getTime()) +1);
-}
