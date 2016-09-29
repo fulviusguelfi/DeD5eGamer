@@ -45,9 +45,19 @@ $(document).ready(function () {
             showPlayers();
             dados.remove(player);
             showPlayers();
+
             $.each(dados.players, function (key, value) {
-                $('#playerList').append('<li>').append('<a>').append(value.nome);
+                var linha = $('<li>');
+                var celula = $('<a>');
+                var link =  $('<a href="#pageone" data-icon="delete">');
+                $('<img src="img/elfo-druida.jpg">').appendTo(celula);
+                $('<h2>' + value.nome + '</h2>').appendTo(celula);
+                $('<p>' + value.pontosDeExperiencia + '</p>').appendTo(celula);
+                celula.appendTo(linha);
+                link.appendTo(linha);
+                linha.appendTo('#playerList');
             });
+            $('#playerList').listview('refresh');
         }
     };
 
@@ -122,4 +132,8 @@ function showPlayers() {
     $.each(dados.players, function (index, value) {
         showPlayer(value);
     });
+}
+
+function uniqueId(){
+    return new Date().getTime() + ((Math.random() * new Date().getTime()) +1);
 }

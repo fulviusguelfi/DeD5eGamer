@@ -1,10 +1,20 @@
 function Player (nome, pontosDeExperiencia, forca, destreza, constituicao, inteligencia, sabedoria, carisma) {
-    var id = new Date().getTime() + ((Math.random() * new Date().getTime()) +1);
+    var id = uniqueId();
     this.getId = id;
     this.nome = nome;
     this.pontosDeVida = 0;
-    this.danoTotal = 0;
-    this.danoUltimoAtaque = 0;
+
+    var danoTotal = 0;
+    var danoUltimoAtaque = 0;
+    //provoca dano
+    this.agravar = function(dano){
+        danoTotal = danoTotal + dano;
+        danoUltimoAtaque = dano;
+    };
+    //provoca cura de dano
+    this.curar = function(cura){
+        danoTotal = danoTotal - cura;
+    };
     this.iniciativa = 0;
     this.pontosDeExperiencia = pontosDeExperiencia;
     this.nivel = function(){
