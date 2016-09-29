@@ -18,68 +18,7 @@
  */
 // A $( document ).ready() block.
 $(document).ready(function () {
-    var app = {
-        // Application Constructor
-        initialize: function () {
-            this.bindEvents();
-        },
-        // Bind Event Listeners
-        //
-        // Bind any events that are required on startup. Common events are:
-        // 'load', 'deviceready', 'offline', and 'online'.
-        bindEvents: function () {
-            document.addEventListener('deviceready', this.onDeviceReady, false);
-        },
-        // deviceready Event Handler
-        //
-        // The scope of 'this' is the event. In order to call the 'receivedEvent'
-        // function, we must explicitly call 'app.receivedEvent(...);'
-        onDeviceReady: function () {
-            console.log('deviceready');
-            var player = new Player('teste', 299, 43, 17, 21, 4, 2, 1);
-            dados.add(player);
-            player = dados.addPlayer('teste1', 300, 18, 17, 10, 12, 11, 8);
-            showPlayers();
-            player.pontosDeExperiencia = 901;
-            dados.update(player);
-            showPlayers();
-            dados.remove(player);
-            showPlayers();
-
-            $.each(dados.players, function (key, value) {
-                var linha = $('<li>');
-                var celula = $('<a>');
-                var link =  $('<a href="#pageone" data-icon="delete">');
-                $('<img src="img/elfo-druida.jpg">').appendTo(celula);
-                $('<h2>' + value.nome + '</h2>').appendTo(celula);
-                $('<p>' + value.pontosDeExperiencia + '</p>').appendTo(celula);
-                celula.appendTo(linha);
-                link.appendTo(linha);
-                linha.appendTo('#playerList');
-            });
-            $('#playerList').listview('refresh');
-        }
-    };
-
-    /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
-    // Selects the correct stylesheet based on feature detects
-    window.grunticon = function (e) {
-        if (e && 3 === e.length) {
-            var t = window, n = !(!t.document.createElementNS || !t.document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect || !document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1") || window.opera && -1 === navigator.userAgent.indexOf("Chrome")), o = function (o) {
-                var r = t.document.createElement("link"), a = t.document.getElementsByTagName("script")[0];
-                r.rel = "stylesheet", r.href = e[o && n ? 0 : o ? 1 : 2], a.parentNode.insertBefore(r, a)
-            }, r = new t.Image;
-            r.onerror = function () {
-                o(!1)
-            }, r.onload = function () {
-                o(1 === r.width && 1 === r.height)
-            }, r.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-        }
-    };
-    // Point to style sheet locations
-    grunticon(["css/jquery.mobile.inline-svg-1.4.5.css", "css/jquery.mobile.inline-png-1.4.5.css", "css/jquery.mobile.external-png-1.4.5.css"]);
-
-
+    //prepare scripts
     $.getScript("js/jsonfn.js")
         .done(function (script, textStatus) {
             console.log(script + " loaded: " + textStatus);
@@ -111,6 +50,66 @@ $(document).ready(function () {
         .fail(function (jqxhr, settings, exception) {
             console.log(script + " load fail: " + exception);
         });
+
+    $.getScript("js/view/screen.js")
+        .done(function (script, textStatus) {
+            console.log(script + " loaded: " + textStatus);
+        })
+        .fail(function (jqxhr, settings, exception) {
+            console.log(script + " load fail: " + exception);
+        });
+
+    var app = {
+        // Application Constructor
+        initialize: function () {
+            this.bindEvents();
+        },
+        // Bind Event Listeners
+        //
+        // Bind any events that are required on startup. Common events are:
+        // 'load', 'deviceready', 'offline', and 'online'.
+        bindEvents: function () {
+            document.addEventListener('deviceready', this.onDeviceReady, false);
+        },
+        // deviceready Event Handler
+        //
+        // The scope of 'this' is the event. In order to call the 'receivedEvent'
+        // function, we must explicitly call 'app.receivedEvent(...);'
+        onDeviceReady: function () {
+            console.log('deviceready');
+            var player = new Player('teste', 299, 43, 17, 21, 4, 2, 1);
+            dados.add(player);
+            player = dados.addPlayer('teste1', 300, 18, 17, 10, 12, 11, 8);
+            showPlayers();
+            player.pontosDeExperiencia = 901;
+            dados.update(player);
+            showPlayers();
+            dados.remove(player);
+            showPlayers()
+            listaPlayers('#playerList');
+
+
+        }
+    };
+
+    /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
+    // Selects the correct stylesheet based on feature detects
+    window.grunticon = function (e) {
+        if (e && 3 === e.length) {
+            var t = window, n = !(!t.document.createElementNS || !t.document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect || !document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1") || window.opera && -1 === navigator.userAgent.indexOf("Chrome")), o = function (o) {
+                var r = t.document.createElement("link"), a = t.document.getElementsByTagName("script")[0];
+                r.rel = "stylesheet", r.href = e[o && n ? 0 : o ? 1 : 2], a.parentNode.insertBefore(r, a)
+            }, r = new t.Image;
+            r.onerror = function () {
+                o(!1)
+            }, r.onload = function () {
+                o(1 === r.width && 1 === r.height)
+            }, r.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+        }
+    };
+    // Point to style sheet locations
+    grunticon(["css/jquery.mobile.inline-svg-1.4.5.css", "css/jquery.mobile.inline-png-1.4.5.css", "css/jquery.mobile.external-png-1.4.5.css"]);
+
     app.initialize();
 });
 
