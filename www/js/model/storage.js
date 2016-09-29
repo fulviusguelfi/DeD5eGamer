@@ -38,7 +38,7 @@ var dados = {
     load: function(){
         dados.players = JSON.parse(window.localStorage.getItem('palyers'));
         return dados.players;
-    },
+    }
 };
 
 function showPlayers () {
