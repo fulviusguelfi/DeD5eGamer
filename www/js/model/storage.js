@@ -13,7 +13,7 @@ var dados = {
         var updated = false;
         dados.load();
         $.each(dados.players, function(index, value){
-            if( value instanceof Player && value.getId === player.getId ){
+            if( value.getId === player.getId ){
                 updated = true;
                 dados.players[index] = player;
             }
@@ -26,17 +26,17 @@ var dados = {
     },
     remove: function(player){
         $.each(dados.players, function(index, value){
-            if( value instanceof Player && value.getId === player.getId ){
+            if( value.getId === player.getId ){
                 dados.players.splice(index, 1);
             }
         });
         dados.save();
     },
     save: function(){
-        window.localStorage.setItem('palyers', JSON.stringify(dados.players));
+        window.localStorage.setItem('players', JSONfn.stringify(dados.players));
     },
     load: function(){
-        dados.players = JSON.parse(window.localStorage.getItem('palyers'));
+        dados.players = JSONfn.parse(window.localStorage.getItem('players'));
         return dados.players;
     }
 };

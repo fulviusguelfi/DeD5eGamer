@@ -1,5 +1,5 @@
 function Player (nome, pontosDeExperiencia, forca, destreza, constituicao, inteligencia, sabedoria, carisma) {
-    var id = new Date().getTime();
+    var id = new Date().getTime() + ((Math.random() * new Date().getTime()) +1);
     this.getId = id;
     this.nome = nome;
     this.pontosDeVida = 0;
