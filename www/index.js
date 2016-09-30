@@ -18,38 +18,6 @@
  */
 // A $( document ).ready() block.
 $(document).ready(function () {
-    //prepare scripts
-    /*$.getScript("js/model/domains.js")
-        .done(function (script, textStatus) {
-            console.log(script + " loaded: " + textStatus);
-        })
-        .fail(function (jqxhr, settings, exception) {
-            console.log(script + " load fail: " + exception);
-        });
-
-    $.getScript("js/model/storage.js")
-        .done(function (script, textStatus) {
-            console.log(script + " loaded: " + textStatus);
-        })
-        .fail(function (jqxhr, settings, exception) {
-            console.log(script + " load fail: " + exception);
-        });
-
-    $.getScript("js/model/player.js")
-        .done(function (script, textStatus) {
-            console.log(script + " loaded: " + textStatus);
-        })
-        .fail(function (jqxhr, settings, exception) {
-            console.log(script + " load fail: " + exception);
-        });
-
-    $.getScript("js/view/screen.js")
-        .done(function (script, textStatus) {
-            console.log(script + " loaded: " + textStatus);
-        })
-        .fail(function (jqxhr, settings, exception) {
-            console.log(script + " load fail: " + exception);
-        });*/
 
     var app = {
         // Application Constructor
@@ -69,15 +37,34 @@ $(document).ready(function () {
         // function, we must explicitly call 'app.receivedEvent(...);'
         onDeviceReady: function () {
             console.log('deviceready');
-            var player1 = DED5EGAMER.model.savePlayer(new DED5EGAMER.model.Player('teste', 299, 43, 17, 21, 4, 2, 1));
-            var player2 = DED5EGAMER.model.savePlayer(new DED5EGAMER.model.Player('teste1', 300, 18, 17, 10, 12, 11, 8));
+            var player1 = DED5EGAMER.controler.createPlayer('druida', 'elfo', 'teste');
+            DED5EGAMER.controler.refreshPlayer(player1);
+            var player2 = DED5EGAMER.controler.createPlayer('paladino', 'anão', 'teste');
+            DED5EGAMER.controler.refreshPlayer(player2);
             player1.pontosDeExperiencia = 901;
-            DED5EGAMER.model.savePlayer(player1);
-            DED5EGAMER.view.listarPlayers(DED5EGAMER.model.players,'#playerList');
-
-
+            DED5EGAMER.controler.refreshPlayer(player1);
+            DED5EGAMER.view.listarPlayers(DED5EGAMER.model.players, '#playerList');
         }
     };
+
+
+    /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
+    // Selects the correct stylesheet based on feature detects
+    window.grunticon = function (e) {
+        if (e && 3 === e.length) {
+            var t = window, n = !(!t.document.createElementNS || !t.document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect || !document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1") || window.opera && -1 === navigator.userAgent.indexOf("Chrome")), o = function (o) {
+                var r = t.document.createElement("link"), a = t.document.getElementsByTagName("script")[0];
+                r.rel = "stylesheet", r.href = e[o && n ? 0 : o ? 1 : 2], a.parentNode.insertBefore(r, a)
+            }, r = new t.Image;
+            r.onerror = function () {
+                o(!1)
+            }, r.onload = function () {
+                o(1 === r.width && 1 === r.height)
+            }, r.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+        }
+    };
+// Point to style sheet locations
+    grunticon(["css/jquery.mobile.inline-svg-1.4.5.css", "css/jquery.mobile.inline-png-1.4.5.css", "css/jquery.mobile.external-png-1.4.5.css"]);
 
     app.initialize();
 });
