@@ -37,12 +37,12 @@ $(document).ready(function () {
         // function, we must explicitly call 'app.receivedEvent(...);'
         onDeviceReady: function () {
             console.log('deviceready');
-            var player1 = DED5EGAMER.controler.createPlayer('druida', 'elfo', 'teste');
-            DED5EGAMER.controler.refreshPlayer(player1);
-            var player2 = DED5EGAMER.controler.createPlayer('paladino', 'anão', 'teste');
-            DED5EGAMER.controler.refreshPlayer(player2);
+            var player1 = DED5EGAMER.controler.player.createPlayer('druida', 'elfo', 'teste');
+            DED5EGAMER.controler.player.refreshPlayer(player1);
+            var player2 = DED5EGAMER.controler.player.createPlayer('paladino', 'anão', 'teste1');
+            DED5EGAMER.controler.player.refreshPlayer(player2);
             player1.pontosDeExperiencia = 901;
-            DED5EGAMER.controler.refreshPlayer(player1);
+            DED5EGAMER.controler.player.refreshPlayer(player1);
             DED5EGAMER.view.listarPlayers(DED5EGAMER.model.players, '#playerList');
         }
     };
