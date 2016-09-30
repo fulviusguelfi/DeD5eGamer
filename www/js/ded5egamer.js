@@ -40,6 +40,7 @@ DED5EGAMER.model = {
         });
     },
 
+
     Player: function (nome, pontosDeExperiencia, forca, destreza, constituicao, inteligencia, sabedoria, carisma) {
         var id = DED5EGAMER.model.uniqueId();
         this.getId = id;
