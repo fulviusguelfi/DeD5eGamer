@@ -25,7 +25,6 @@ DED5EGAMER.model = {
         if (!updated) {
             DED5EGAMER.model.players[DED5EGAMER.model.players.length] = player;
         }
-        return player;
     },
 
     removePlayer: function (player) {
@@ -97,15 +96,12 @@ DED5EGAMER.controler.player = {
         player.nome = nome;
         player.raca = raca;
         player.classe = classe;
-        DED5EGAMER.model.savePlayer(player);
+        this.refreshPlayer(player);
         return player;
     },
     refreshPlayer: function(player){
         player.nivel = DED5EGAMER.controler.player.nivelProficienciaPorExperiencia(player.pontosDeExperiencia).nivel;
         player.proficiencia = DED5EGAMER.controler.player.nivelProficienciaPorExperiencia(player.pontosDeExperiencia).proficiencia;
-        DED5EGAMER.model.savePlayer(player);
-    },
-    activePlayer: function (player) {
         player.modificadorDeAtributo.forca = DED5EGAMER.controler.player.modificadorPorAtributo(player.forca);
         player.modificadorDeAtributo.destreza = DED5EGAMER.controler.player.modificadorPorAtributo(player.destreza);
         player.modificadorDeAtributo.constituicao = DED5EGAMER.controler.player.modificadorPorAtributo(player.constituicao);
@@ -118,10 +114,10 @@ DED5EGAMER.controler.player = {
 
 DED5EGAMER.view = {
 
-    listarPlayers: function (players, container) {
+    listarPlayers: function (container) {
         $(container).empty();
         $(container).listview();
-        $.each(players, function (key, value) {
+        $.each(DED5EGAMER.model.players, function (key, value) {
             var linha = $('<li>');
 
             var celula1 = $('<a>');
