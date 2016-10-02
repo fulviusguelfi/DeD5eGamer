@@ -3,10 +3,17 @@ var DED5EGAMER = DED5EGAMER || {};
 
 //domains
 DED5EGAMER.domains = {
-    experienciaNivelProficiencia: {
+    experienciaNivelProficiencia: $.extend({
         0: {nivel: 1, proficiencia: +2},
         300: {nivel: 2, proficiencia: +2},
         900: {nivel: 3, proficiencia: +2}
+    }),
+
+    classes: ['druida', 'paladino'],
+    racas: ['elfo', 'anão'],
+    nomes: {
+        elfo: ['Laucian', 'teste1'],
+        anão: ['Oleg', 'Ivaar']
     }
 };
 
@@ -79,7 +86,7 @@ DED5EGAMER.controler.player = {
     //regta do nivel e proficiencia da experiencia
     nivelProficienciaPorExperiencia: function (pontosDeExperiencia) {
         var obj = null;
-        $.each(DED5EGAMER.domains.experienciaNivelProficiencia, function (key, value) {
+        $.each( DED5EGAMER.domains.experienciaNivelProficiencia, function (key, value) {
             if (pontosDeExperiencia >= key) {
                 obj = value;
             }
@@ -135,5 +142,18 @@ DED5EGAMER.view = {
             $(container).append(linha);
         });
         $(container).listview('refresh');
+    },
+    listarRacas: function(container){
+        DED5EGAMER.view.listarParaSelect(DED5EGAMER.domains.racas, container);
+    },
+    listarClasses: function(container){
+        DED5EGAMER.view.listarParaSelect(DED5EGAMER.domains.classes, container);
+    },
+    listarParaSelect: function(data, container){
+        $.each(data, function(index, value){
+            $(container).append(
+                $("<option>").attr('value', value).text(value)
+            );
+        });
     }
 };

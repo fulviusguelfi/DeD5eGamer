@@ -59,13 +59,27 @@
 </div>
 
 <div data-role="page" id="listPlayers">
+    <a href="#popupBasic" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-icon-plus"
+       data-transition="slide-down">Criar Jogador</a>
+
     <div role="main" class="ui-content">
         <ul data-role="listview" id="playerList"></ul>
         <br>
         <a href="#pageone">Go to Page One</a>
     </div>
+    <div data-role="popup" id="popupBasic" class="ui-content">
+        <div data-role="main" class="ui-field-contain">
+                <legend>Criando Jogador</legend>
+                <select title="Selecione a Raça" name="select-raca" id="select-raca" data-placeholder="true" data-mini="true">
+                    <option>Selecione a Raça</option>
+                </select>
+            <select title="Selecione a Classe" name="select-classe" id="select-classe" data-placeholder="true" data-mini="true">
+                <option>Selecione a Classe</option>
+            </select>
+        </div>
+    </div>
     <div data-role="footer">
-        <a href="#" data-role="button" data-icon="plus">Criar Jogador</a>
+
     </div>
 </div>
 <script type="text/javascript" src="cordova.js"></script>

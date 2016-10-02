@@ -37,6 +37,8 @@ $(document).ready(function () {
         // function, we must explicitly call 'app.receivedEvent(...);'
         onDeviceReady: function () {
             console.log('deviceready');
+            DED5EGAMER.view.listarRacas('#select-raca');
+            DED5EGAMER.view.listarClasses('#select-classe');
             var player1 = DED5EGAMER.controler.player.createPlayer('druida', 'elfo', 'teste');
             var player2 = DED5EGAMER.controler.player.createPlayer('paladino', 'anão', 'teste1');
             player1.pontosDeExperiencia = 901;
