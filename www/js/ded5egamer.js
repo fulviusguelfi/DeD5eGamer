@@ -14,6 +14,10 @@ DED5EGAMER.domains = {
     nomes: {
         elfo: ['Laucian', 'teste1'],
         anão: ['Oleg', 'Ivaar']
+    },
+    sobreNomes: {
+        elfo: ['Nai&quot;lo', 'teste1'],
+        anão: ['Frostbread']
     }
 };
 
@@ -38,6 +42,15 @@ DED5EGAMER.model = {
         $.each(DED5EGAMER.model.players, function (index, value) {
             if (value.id === player.id) {
                 DED5EGAMER.model.players.splice(index, 1);
+                return false;
+            }
+        });
+    },
+
+    loadPlayer: function(player){
+        $.each(DED5EGAMER.model.players, function (index, value) {
+            if (value.id === player.id) {
+                DED5EGAMER.controler.player.thePlayer = value;
                 return false;
             }
         });
@@ -83,11 +96,12 @@ DED5EGAMER.controler = {
 };
 
 DED5EGAMER.controler.player = {
+    thePlayer: '',
     //regta do nivel e proficiencia da experiencia
-    nivelProficienciaPorExperiencia: function (pontosDeExperiencia) {
+    nivelProficienciaPorExperiencia: function () {
         var obj = null;
         $.each( DED5EGAMER.domains.experienciaNivelProficiencia, function (key, value) {
-            if (pontosDeExperiencia >= key) {
+            if (DED5EGAMER.controler.player.thePlayer.pontosDeExperiencia >= key) {
                 obj = value;
             }
         });
@@ -97,25 +111,23 @@ DED5EGAMER.controler.player = {
     modificadorPorAtributo: function (atributo) {
         return Math.floor(( (atributo - 10) / 2 ));
     },
-    createPlayer: function (classe, raca, nome) {
-        player = Object.assign({}, DED5EGAMER.model.data.player);
-        player.id = DED5EGAMER.controler.getUniqueId();
-        player.nome = nome;
-        player.raca = raca;
-        player.classe = classe;
-        this.refreshPlayer(player);
-        return player;
+    newPlayer: function () {
+        DED5EGAMER.controler.player.thePlayer = Object.assign({}, DED5EGAMER.model.data.player);
     },
-    refreshPlayer: function(player){
-        player.nivel = DED5EGAMER.controler.player.nivelProficienciaPorExperiencia(player.pontosDeExperiencia).nivel;
-        player.proficiencia = DED5EGAMER.controler.player.nivelProficienciaPorExperiencia(player.pontosDeExperiencia).proficiencia;
-        player.modificadorDeAtributo.forca = DED5EGAMER.controler.player.modificadorPorAtributo(player.forca);
-        player.modificadorDeAtributo.destreza = DED5EGAMER.controler.player.modificadorPorAtributo(player.destreza);
-        player.modificadorDeAtributo.constituicao = DED5EGAMER.controler.player.modificadorPorAtributo(player.constituicao);
-        player.modificadorDeAtributo.inteligencia = DED5EGAMER.controler.player.modificadorPorAtributo(player.inteligencia);
-        player.modificadorDeAtributo.sabedoria = DED5EGAMER.controler.player.modificadorPorAtributo(player.sabedoria);
-        player.modificadorDeAtributo.carisma = DED5EGAMER.controler.player.modificadorPorAtributo(player.carisma);
-        DED5EGAMER.model.savePlayer(player);
+    createPlayer: function () {
+        DED5EGAMER.controler.player.thePlayer.id = DED5EGAMER.controler.getUniqueId();
+        this.refreshPlayer(DED5EGAMER.controler.player.thePlayer);
+    },
+    refreshPlayer: function(){
+        DED5EGAMER.controler.player.thePlayer.nivel = DED5EGAMER.controler.player.nivelProficienciaPorExperiencia().nivel;
+        DED5EGAMER.controler.player.thePlayer.proficiencia = DED5EGAMER.controler.player.nivelProficienciaPorExperiencia().proficiencia;
+        DED5EGAMER.controler.player.thePlayer.modificadorDeAtributo.forca = DED5EGAMER.controler.player.modificadorPorAtributo(DED5EGAMER.controler.player.thePlayer.forca);
+        DED5EGAMER.controler.player.thePlayer.modificadorDeAtributo.destreza = DED5EGAMER.controler.player.modificadorPorAtributo(DED5EGAMER.controler.player.thePlayer.destreza);
+        DED5EGAMER.controler.player.thePlayer.modificadorDeAtributo.constituicao = DED5EGAMER.controler.player.modificadorPorAtributo(DED5EGAMER.controler.player.thePlayer.constituicao);
+        DED5EGAMER.controler.player.thePlayer.modificadorDeAtributo.inteligencia = DED5EGAMER.controler.player.modificadorPorAtributo(DED5EGAMER.controler.player.thePlayer.inteligencia);
+        DED5EGAMER.controler.player.thePlayer.modificadorDeAtributo.sabedoria = DED5EGAMER.controler.player.modificadorPorAtributo(DED5EGAMER.controler.player.thePlayer.sabedoria);
+        DED5EGAMER.controler.player.thePlayer.modificadorDeAtributo.carisma = DED5EGAMER.controler.player.modificadorPorAtributo(DED5EGAMER.controler.player.thePlayer.carisma);
+        DED5EGAMER.model.savePlayer(DED5EGAMER.controler.player.thePlayer);
     }
 };
 
@@ -127,7 +139,11 @@ DED5EGAMER.view = {
         $.each(DED5EGAMER.model.players, function (key, value) {
             var linha = $('<li>');
 
-            var celula1 = $('<a>');
+            var celula1 = $('<a>')
+                .attr('href', '#playerPage')
+                .on('click', function(){
+                DED5EGAMER.controler.player.thePlayer = value;
+            });
             $('<img>').attr('src', 'img/elfo-druida.jpg').appendTo(celula1);
             $(celula1).append($('<h2>').append(value.nome));
             $(celula1).append($('<p>').append(value.nivel));
@@ -135,7 +151,7 @@ DED5EGAMER.view = {
 
             var celula2 = $('<a>').attr('data-icon', 'delete').attr('href', '#').click(event, function () {
                 DED5EGAMER.model.removePlayer(value);
-                DED5EGAMER.view.listarPlayers(DED5EGAMER.model.players, container);
+                DED5EGAMER.view.listarPlayers(container);
             });
             linha.append(celula2);
 
@@ -152,7 +168,10 @@ DED5EGAMER.view = {
     listarParaSelect: function(data, container){
         $.each(data, function(index, value){
             $(container).append(
-                $("<option>").attr('value', value).text(value)
+                $("<option>")
+                    .addClass('capitalize')
+                    .attr('value', value)
+                    .text(value)
             );
         });
     }

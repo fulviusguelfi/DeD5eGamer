@@ -30,6 +30,19 @@ $(document).ready(function () {
         // 'load', 'deviceready', 'offline', and 'online'.
         bindEvents: function () {
             document.addEventListener('deviceready', this.onDeviceReady, false);
+            $("#criarJogadorBtn").on ('click', function (event) {
+                DED5EGAMER.controler.player.newPlayer();
+            });
+            $('#select-raca').on('change', function (event) {
+                DED5EGAMER.controler.player.thePlayer.raca = $( "#select-raca option:selected"  ).val();
+            });
+            $('#select-classe').on('change', function (event) {
+                DED5EGAMER.controler.player.thePlayer.classe = $( "#select-classe option:selected"  ).val();
+            });
+            $('#popupRacaClasse').on('popupafterclose', function(event){
+                DED5EGAMER.controler.player.createPlayer();
+                DED5EGAMER.view.listarPlayers('#playerList');
+            });
         },
         // deviceready Event Handler
         //
@@ -39,10 +52,6 @@ $(document).ready(function () {
             console.log('deviceready');
             DED5EGAMER.view.listarRacas('#select-raca');
             DED5EGAMER.view.listarClasses('#select-classe');
-            var player1 = DED5EGAMER.controler.player.createPlayer('druida', 'elfo', 'teste');
-            var player2 = DED5EGAMER.controler.player.createPlayer('paladino', 'anão', 'teste1');
-            player1.pontosDeExperiencia = 901;
-            DED5EGAMER.controler.player.refreshPlayer(player1);
             DED5EGAMER.view.listarPlayers('#playerList');
         }
     };
