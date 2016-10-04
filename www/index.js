@@ -33,15 +33,16 @@ $(document).ready(function () {
             $("#criarJogadorBtn").on ('click', function (event) {
                 DED5EGAMER.controler.player.newPlayer();
             });
+            $('#novoJogadorBtn').on ('click', function (event) {
+                DED5EGAMER.controler.player.createPlayer();
+                DED5EGAMER.view.listarPlayers('#playerList');
+                $.mobile.navigate('#listPlayers');
+            });
             $('#select-raca').on('change', function (event) {
                 DED5EGAMER.controler.player.thePlayer.raca = $( "#select-raca option:selected"  ).val();
             });
             $('#select-classe').on('change', function (event) {
                 DED5EGAMER.controler.player.thePlayer.classe = $( "#select-classe option:selected"  ).val();
-            });
-            $('#popupRacaClasse').on('popupafterclose', function(event){
-                DED5EGAMER.controler.player.createPlayer();
-                DED5EGAMER.view.listarPlayers('#playerList');
             });
         },
         // deviceready Event Handler

@@ -20,17 +20,21 @@
 </head>
 <body>
 <div data-role="page" id="listPlayers">
-    <a id="criarJogadorBtn" href="#popupRacaClasse" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-icon-plus"
+    <a id="criarJogadorBtn" href="#playerPage"  class="ui-btn ui-corner-all ui-shadow ui-icon-plus"
        data-transition="slide-down">Criar Jogador</a>
     <div role="main" class="ui-content">
         <ul data-role="listview" id="playerList"></ul>
         <br>
         <a href="#playerPage">Jogador</a>
     </div>
-    <div data-role="popup" id="popupRacaClasse" class="ui-content">
-        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+</div>
+
+<div data-role="page" id="playerPage">
+    <div data-role="header">
+        <h1>Criando Jogador</h1>
+    </div>
+    <div data-role="main" class="ui-content">
         <div class="ui-field-contain">
-            <legend>Criando Jogador</legend>
             <select title="Selecione a Raça" name="select-raca" id="select-raca" data-placeholder="true"
                     data-mini="true">
                 <option value="">Selecione a Raça</option>
@@ -39,20 +43,22 @@
                     data-mini="true">
                 <option value="">Selecione a Classe</option>
             </select>
+            <label for="nome-jogador">Digite um nome</label>
+            <input title="Nome do Jogador" type="text" id="nome-jogador" name="nome-jogador">
+            <label for="select-nome">ou selecione da lista abaixo</label>
+            <select title="Nomes Sugeridos" name="select-nome" id="select-nome" data-placeholder="true"
+                    data-mini="true">
+                <option value="">Nomes Sugeridos</option>
+            </select>
+            <select title="Sobre Nomes Sugeridos" name="select-sobre-nome" id="select-sobre-nome" data-placeholder="true"
+                    data-mini="true">
+                <option value="">Sobre Nomes Sugeridos</option>
+            </select>
         </div>
     </div>
-</div>
-
-<div data-role="page" id="playerPage">
-    <div data-role="header">
-        <h1>Jogador</h1>
-    </div>
-    <div data-role="main" class="ui-content">
-        <p>Esta é a página de Jogador.</p>
-        <a href="#listPlayers">Lista</a>
-    </div>
     <div data-role="footer">
-        <h1>Footer Text</h1>
+        <a id="novoJogadorBtn" href="#listPlayers" class="ui-btn ui-corner-all ui-shadow ui-icon-plus"
+           data-transition="slide-down">OK!</a>
     </div>
 </div>
 
