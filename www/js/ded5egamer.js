@@ -36,6 +36,7 @@ DED5EGAMER.model = {
         if (!updated) {
             DED5EGAMER.model.players[DED5EGAMER.model.players.length] = player;
         }
+        window.localStorage.setItem('DED5EGAMER.players', JSON.stringify(DED5EGAMER.model.players));
     },
 
     removePlayer: function (player) {
@@ -45,16 +46,14 @@ DED5EGAMER.model = {
                 return false;
             }
         });
+        window.localStorage.setItem('DED5EGAMER.players', JSON.stringify(DED5EGAMER.model.players));
     },
 
-    loadPlayer: function(player){
-        $.each(DED5EGAMER.model.players, function (index, value) {
-            if (value.id === player.id) {
-                DED5EGAMER.controler.player.thePlayer = value;
-                return false;
-            }
-        });
-    }
+    loadAllPlayers: function() {
+        if (window.localStorage.getItem('DED5EGAMER.players') !== null) {
+            DED5EGAMER.model.players = JSON.parse(window.localStorage.getItem('DED5EGAMER.players'));
+        }
+    },
 };
 
 DED5EGAMER.model.data = {
@@ -128,6 +127,14 @@ DED5EGAMER.controler.player = {
         DED5EGAMER.controler.player.thePlayer.modificadorDeAtributo.sabedoria = DED5EGAMER.controler.player.modificadorPorAtributo(DED5EGAMER.controler.player.thePlayer.sabedoria);
         DED5EGAMER.controler.player.thePlayer.modificadorDeAtributo.carisma = DED5EGAMER.controler.player.modificadorPorAtributo(DED5EGAMER.controler.player.thePlayer.carisma);
         DED5EGAMER.model.savePlayer(DED5EGAMER.controler.player.thePlayer);
+    },
+    loadPlayer: function(player){
+        $.each(DED5EGAMER.model.players, function (index, value) {
+            if (value.id === player.id) {
+                DED5EGAMER.controler.player.thePlayer = value;
+                return false;
+            }
+        });
     }
 };
 
@@ -136,13 +143,13 @@ DED5EGAMER.view = {
     listarPlayers: function (container) {
         $(container).empty();
         $(container).listview();
+        DED5EGAMER.model.loadAllPlayers();
         $.each(DED5EGAMER.model.players, function (key, value) {
             var linha = $('<li>');
 
             var celula1 = $('<a>')
-                .attr('href', '#playerPage')
-                .on('click', function(){
-                DED5EGAMER.controler.player.thePlayer = value;
+                .on('click', function(event){
+                DED5EGAMER.controler.player.loadPlayer(value);
             });
             $('<img>').attr('src', 'img/elfo-druida.jpg').appendTo(celula1);
             $(celula1).append($('<h2>').append(value.nome));

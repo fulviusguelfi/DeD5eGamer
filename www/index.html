@@ -20,16 +20,18 @@
 </head>
 <body>
 <div data-role="page" id="listPlayers">
-    <a id="criarJogadorBtn" href="#playerPage"  class="ui-btn ui-corner-all ui-shadow ui-icon-plus"
+    <a id="criarJogadorBtn" href="#editPlayerPage"  class="ui-btn ui-corner-all ui-shadow ui-icon-plus"
        data-transition="slide-down">Criar Jogador</a>
     <div role="main" class="ui-content">
         <ul data-role="listview" id="playerList"></ul>
-        <br>
-        <a href="#playerPage">Jogador</a>
     </div>
 </div>
 
 <div data-role="page" id="playerPage">
+    <a id="editarJogadorBtn" href="#editPlayerPage"  class="ui-btn ui-corner-all ui-shadow ui-icon-check"
+       data-transition="slide-down">Editar Jogador</a>
+    </div>
+<div data-role="page" id="editPlayerPage">
     <div data-role="header">
         <h1>Criando Jogador</h1>
     </div>
