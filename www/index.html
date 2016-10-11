@@ -20,7 +20,7 @@
 </head>
 <body>
 <div data-role="page" id="listPlayers">
-    <a id="criarJogadorBtn" href="#editPlayerPage"  class="ui-btn ui-corner-all ui-shadow ui-icon-plus"
+    <a id="criarJogadorBtn" href="#createPlayerPage"  class="ui-btn ui-corner-all ui-shadow ui-icon-plus"
        data-transition="slide-down">Criar Jogador</a>
     <div role="main" class="ui-content">
         <ul data-role="listview" id="playerList"></ul>
@@ -28,39 +28,43 @@
 </div>
 
 <div data-role="page" id="playerPage">
-    <a id="editarJogadorBtn" href="#editPlayerPage"  class="ui-btn ui-corner-all ui-shadow ui-icon-check"
+    <div data-role="header">
+        <h1>Criando Jogador</h1>
+    </div>
+    <a id="editarJogadorBtn" href="#createPlayerPage"  class="ui-btn ui-corner-all ui-shadow ui-icon-check"
        data-transition="slide-down">Editar Jogador</a>
     </div>
-<div data-role="page" id="editPlayerPage">
+<div data-role="page" id="createPlayerPage">
     <div data-role="header">
         <h1>Criando Jogador</h1>
     </div>
     <div data-role="main" class="ui-content">
-        <div class="ui-field-contain">
-            <select title="Selecione a Raça" name="select-raca" id="select-raca" data-placeholder="true"
+        <form id="createPlayerFrm" name="createPlayerFrm">
+            <label for="select-racar">Raça</label>
+            <select required title="Selecione a Raça" name="select-raca" id="select-raca" data-placeholder="true"
                     data-mini="true">
                 <option value="">Selecione a Raça</option>
             </select>
-            <select title="Selecione a Classe" name="select-classe" id="select-classe" data-placeholder="true"
+            <label for="select-classe">Classe</label>
+            <select required title="Selecione a Classe" name="select-classe" id="select-classe" data-placeholder="true"
                     data-mini="true">
                 <option value="">Selecione a Classe</option>
             </select>
-            <label for="nome-jogador">Digite um nome</label>
-            <input title="Nome do Jogador" type="text" id="nome-jogador" name="nome-jogador">
+            <label for="nome-jogador">Nome</label>
+            <input required title="Nome do Jogador" type="text" id="nome-jogador" name="nome-jogador">
             <label for="select-nome">ou selecione da lista abaixo</label>
             <select title="Nomes Sugeridos" name="select-nome" id="select-nome" data-placeholder="true"
                     data-mini="true">
                 <option value="">Nomes Sugeridos</option>
             </select>
+            <label for="sobreNome-jogador">Sobrenome</label>
+            <input required title="Nome do Jogador" type="text" id="sobreNome-jogador" name="nome-jogador">
             <select title="Sobre Nomes Sugeridos" name="select-sobre-nome" id="select-sobre-nome" data-placeholder="true"
                     data-mini="true">
                 <option value="">Sobre Nomes Sugeridos</option>
             </select>
-        </div>
-    </div>
-    <div data-role="footer">
-        <a id="novoJogadorBtn" href="#listPlayers" class="ui-btn ui-corner-all ui-shadow ui-icon-plus"
-           data-transition="slide-down">OK!</a>
+            <input type="submit" value="Continue...">
+        </form>
     </div>
 </div>
 

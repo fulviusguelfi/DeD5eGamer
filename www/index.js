@@ -33,17 +33,32 @@ $(document).ready(function () {
             $("#criarJogadorBtn").on ('click', function (event) {
                 DED5EGAMER.controler.player.newPlayer();
             });
-            $('#novoJogadorBtn').on ('click', function (event) {
-                DED5EGAMER.controler.player.createPlayer();
-                DED5EGAMER.view.listarPlayers('#playerList');
-                $.mobile.navigate('#listPlayers');
-            });
             $('#select-raca').on('change', function (event) {
                 DED5EGAMER.controler.player.thePlayer.raca = $( "#select-raca option:selected"  ).val();
+                DED5EGAMER.view.listarNomes('#select-nome');
+                DED5EGAMER.view.listarSobreNomes('#select-sobre-nome');
             });
             $('#select-classe').on('change', function (event) {
                 DED5EGAMER.controler.player.thePlayer.classe = $( "#select-classe option:selected"  ).val();
             });
+            $('#select-nome').on('change', function (event) {
+                $('#nome-jogador').val($( "#select-nome option:selected"  ).val()).trigger('change');
+            });
+            $('#select-sobre-nome').on('change', function (event) {
+                $('#sobreNome-jogador').val($( "#select-sobre-nome option:selected"  ).val()).trigger('change');
+            });
+            $('#nome-jogador').on('change', function (event) {
+                DED5EGAMER.controler.player.thePlayer.nome = $('#nome-jogador').val();
+            });
+            $('#sobreNome-jogador').on('change', function (event) {
+                DED5EGAMER.controler.player.thePlayer.sobreNome = $('#sobreNome-jogador').val();
+            });
+            $('#createPlayerFrm').on('submit', function (event) {
+                event.preventDefault();
+                DED5EGAMER.controler.player.createPlayer();
+                DED5EGAMER.view.listarJogadores('#playerList');
+                $.mobile.navigate('#listPlayers');
+            })
         },
         // deviceready Event Handler
         //
@@ -53,7 +68,7 @@ $(document).ready(function () {
             console.log('deviceready');
             DED5EGAMER.view.listarRacas('#select-raca');
             DED5EGAMER.view.listarClasses('#select-classe');
-            DED5EGAMER.view.listarPlayers('#playerList');
+            DED5EGAMER.view.listarJogadores('#playerList');
         }
     };
 

@@ -16,7 +16,7 @@ DED5EGAMER.domains = {
         anão: ['Oleg', 'Ivaar']
     },
     sobreNomes: {
-        elfo: ['Nai&quot;lo', 'teste1'],
+        elfo: ["Nai'lo", 'teste1'],
         anão: ['Frostbread']
     }
 };
@@ -60,6 +60,7 @@ DED5EGAMER.model.data = {
     player: {
         id: 0,
         nome: '',
+        sobreNome: '',
         raca: '',
         classe: '',
         pontosDeExperiencia: 0,
@@ -140,9 +141,8 @@ DED5EGAMER.controler.player = {
 
 DED5EGAMER.view = {
 
-    listarPlayers: function (container) {
-        $(container).empty();
-        $(container).listview();
+    listarJogadores: function (container) {
+        $(container).listview().empty();
         DED5EGAMER.model.loadAllPlayers();
         $.each(DED5EGAMER.model.players, function (key, value) {
             var linha = $('<li>');
@@ -152,13 +152,13 @@ DED5EGAMER.view = {
                 DED5EGAMER.controler.player.loadPlayer(value);
             });
             $('<img>').attr('src', 'img/elfo-druida.jpg').appendTo(celula1);
-            $(celula1).append($('<h2>').append(value.nome));
-            $(celula1).append($('<p>').append(value.nivel));
+            $(celula1).append($('<h2>').append(value.nome + ' ' + value.sobreNome));
+            $(celula1).append($('<p>').append('Nível: ' + value.nivel));
             linha.append(celula1);
 
             var celula2 = $('<a>').attr('data-icon', 'delete').attr('href', '#').click(event, function () {
                 DED5EGAMER.model.removePlayer(value);
-                DED5EGAMER.view.listarPlayers(container);
+                DED5EGAMER.view.listarJogadores(container);
             });
             linha.append(celula2);
 
@@ -171,6 +171,12 @@ DED5EGAMER.view = {
     },
     listarClasses: function(container){
         DED5EGAMER.view.listarParaSelect(DED5EGAMER.domains.classes, container);
+    },
+    listarNomes: function (container) {
+        DED5EGAMER.view.listarParaSelect(DED5EGAMER.domains.nomes[DED5EGAMER.controler.player.thePlayer.raca], container);
+    },
+    listarSobreNomes: function (container) {
+        DED5EGAMER.view.listarParaSelect(DED5EGAMER.domains.sobreNomes[DED5EGAMER.controler.player.thePlayer.raca], container);
     },
     listarParaSelect: function(data, container){
         $.each(data, function(index, value){
