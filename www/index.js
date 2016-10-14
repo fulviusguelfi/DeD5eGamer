@@ -30,22 +30,26 @@ $(document).ready(function () {
         // 'load', 'deviceready', 'offline', and 'online'.
         bindEvents: function () {
             document.addEventListener('deviceready', this.onDeviceReady, false);
-            $("#criarJogadorBtn").on ('click', function (event) {
+            $("#criarJogadorBtn").on('click', function (event) {
                 DED5EGAMER.controler.player.newPlayer();
             });
             $('#select-raca').on('change', function (event) {
-                DED5EGAMER.controler.player.thePlayer.raca = $( "#select-raca option:selected"  ).val();
+                DED5EGAMER.controler.player.thePlayer.raca = $("#select-raca option:selected").val();
+                $('#select-nome option');
+                $('#select-sobre-nome option').prop('selected', function () {
+                    return this.defaultSelected;
+                });
                 DED5EGAMER.view.listarNomes('#select-nome');
                 DED5EGAMER.view.listarSobreNomes('#select-sobre-nome');
             });
             $('#select-classe').on('change', function (event) {
-                DED5EGAMER.controler.player.thePlayer.classe = $( "#select-classe option:selected"  ).val();
+                DED5EGAMER.controler.player.thePlayer.classe = $("#select-classe option:selected").val();
             });
             $('#select-nome').on('change', function (event) {
-                $('#nome-jogador').val($( "#select-nome option:selected"  ).val()).trigger('change');
+                $('#nome-jogador').val($("#select-nome option:selected").val()).trigger('change');
             });
             $('#select-sobre-nome').on('change', function (event) {
-                $('#sobreNome-jogador').val($( "#select-sobre-nome option:selected"  ).val()).trigger('change');
+                $('#sobreNome-jogador').val($("#select-sobre-nome option:selected").val()).trigger('change');
             });
             $('#nome-jogador').on('change', function (event) {
                 DED5EGAMER.controler.player.thePlayer.nome = $('#nome-jogador').val();
@@ -58,7 +62,10 @@ $(document).ready(function () {
                 DED5EGAMER.controler.player.createPlayer();
                 DED5EGAMER.view.listarJogadores('#playerList');
                 $.mobile.navigate('#listPlayers');
-            })
+            });
+            $('#createPlayerFrm').on('reset', function (event) {
+                //event.preventDefault();
+            });
         },
         // deviceready Event Handler
         //

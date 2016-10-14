@@ -3,12 +3,15 @@ var DED5EGAMER = DED5EGAMER || {};
 
 //domains
 DED5EGAMER.domains = {
-    experienciaNivelProficiencia: $.extend({
+    experienciaNivelProficiencia: {
         0: {nivel: 1, proficiencia: +2},
         300: {nivel: 2, proficiencia: +2},
         900: {nivel: 3, proficiencia: +2}
-    }),
-
+    },
+    niveisConstrucaoPorPaginaDestino: {
+        10: '#create_palyer_10',
+        25: '#create_palyer_25'
+    },
     classes: ['druida', 'paladino'],
     racas: ['elfo', 'anão'],
     nomes: {
@@ -49,7 +52,7 @@ DED5EGAMER.model = {
         window.localStorage.setItem('DED5EGAMER.players', JSON.stringify(DED5EGAMER.model.players));
     },
 
-    loadAllPlayers: function() {
+    loadAllPlayers: function () {
         if (window.localStorage.getItem('DED5EGAMER.players') !== null) {
             DED5EGAMER.model.players = JSON.parse(window.localStorage.getItem('DED5EGAMER.players'));
         }
@@ -59,6 +62,7 @@ DED5EGAMER.model = {
 DED5EGAMER.model.data = {
     player: {
         id: 0,
+        nivelConstrucao: 0,
         nome: '',
         sobreNome: '',
         raca: '',
@@ -100,7 +104,7 @@ DED5EGAMER.controler.player = {
     //regta do nivel e proficiencia da experiencia
     nivelProficienciaPorExperiencia: function () {
         var obj = null;
-        $.each( DED5EGAMER.domains.experienciaNivelProficiencia, function (key, value) {
+        $.each(DED5EGAMER.domains.experienciaNivelProficiencia, function (key, value) {
             if (DED5EGAMER.controler.player.thePlayer.pontosDeExperiencia >= key) {
                 obj = value;
             }
@@ -109,16 +113,18 @@ DED5EGAMER.controler.player = {
     },
     //regta do modificador do atributo
     modificadorPorAtributo: function (atributo) {
-        return Math.floor(( (atributo - 10) / 2 ));
+        return Math.floor(((atributo - 10) / 2));
     },
     newPlayer: function () {
         DED5EGAMER.controler.player.thePlayer = Object.assign({}, DED5EGAMER.model.data.player);
+        DED5EGAMER.controler.player.thePlayer.nivelConstrucao = .01;
     },
     createPlayer: function () {
         DED5EGAMER.controler.player.thePlayer.id = DED5EGAMER.controler.getUniqueId();
         this.refreshPlayer(DED5EGAMER.controler.player.thePlayer);
+        DED5EGAMER.controler.player.thePlayer.nivelConstrucao = .10;
     },
-    refreshPlayer: function(){
+    refreshPlayer: function () {
         DED5EGAMER.controler.player.thePlayer.nivel = DED5EGAMER.controler.player.nivelProficienciaPorExperiencia().nivel;
         DED5EGAMER.controler.player.thePlayer.proficiencia = DED5EGAMER.controler.player.nivelProficienciaPorExperiencia().proficiencia;
         DED5EGAMER.controler.player.thePlayer.modificadorDeAtributo.forca = DED5EGAMER.controler.player.modificadorPorAtributo(DED5EGAMER.controler.player.thePlayer.forca);
@@ -129,7 +135,7 @@ DED5EGAMER.controler.player = {
         DED5EGAMER.controler.player.thePlayer.modificadorDeAtributo.carisma = DED5EGAMER.controler.player.modificadorPorAtributo(DED5EGAMER.controler.player.thePlayer.carisma);
         DED5EGAMER.model.savePlayer(DED5EGAMER.controler.player.thePlayer);
     },
-    loadPlayer: function(player){
+    loadPlayer: function (player) {
         $.each(DED5EGAMER.model.players, function (index, value) {
             if (value.id === player.id) {
                 DED5EGAMER.controler.player.thePlayer = value;
@@ -148,12 +154,23 @@ DED5EGAMER.view = {
             var linha = $('<li>');
 
             var celula1 = $('<a>')
-                .on('click', function(event){
-                DED5EGAMER.controler.player.loadPlayer(value);
-            });
+                    .on('click', function (event) {
+                        DED5EGAMER.controler.player.loadPlayer(value);
+                        var nivel = DED5EGAMER.controler.player.thePlayer.nivelConstrucao;
+                        var paginaPorNivel = DED5EGAMER.domains.niveisConstrucaoPorPaginaDestino;
+                        $.mobile.navigate(paginaPorNivel[nivel]);
+
+                    });
             $('<img>').attr('src', 'img/elfo-druida.jpg').appendTo(celula1);
             $(celula1).append($('<h2>').append(value.nome + ' ' + value.sobreNome));
             $(celula1).append($('<p>').append('Nível: ' + value.nivel));
+            $(celula1).append(
+                $('<div>').attr('id name', 'progresBarTo'+DED5EGAMER.controler.player.thePlayer.id).addClass('progressBar').append(
+                    $('<div>').attr('id name', 'barTo'+DED5EGAMER.controler.player.thePlayer.id).addClass('bar').append(
+                        $('<div>').attr('id name', 'labelBarTo'+DED5EGAMER.controler.player.thePlayer.id).addClass('labelBar')
+                    )
+                )
+            );
             linha.append(celula1);
 
             var celula2 = $('<a>').attr('data-icon', 'delete').attr('href', '#').click(event, function () {
@@ -161,15 +178,14 @@ DED5EGAMER.view = {
                 DED5EGAMER.view.listarJogadores(container);
             });
             linha.append(celula2);
-
             $(container).append(linha);
         });
         $(container).listview('refresh');
     },
-    listarRacas: function(container){
+    listarRacas: function (container) {
         DED5EGAMER.view.listarParaSelect(DED5EGAMER.domains.racas, container);
     },
-    listarClasses: function(container){
+    listarClasses: function (container) {
         DED5EGAMER.view.listarParaSelect(DED5EGAMER.domains.classes, container);
     },
     listarNomes: function (container) {
@@ -178,14 +194,15 @@ DED5EGAMER.view = {
     listarSobreNomes: function (container) {
         DED5EGAMER.view.listarParaSelect(DED5EGAMER.domains.sobreNomes[DED5EGAMER.controler.player.thePlayer.raca], container);
     },
-    listarParaSelect: function(data, container){
-        $.each(data, function(index, value){
+    listarParaSelect: function (data, container) {
+        $(container + ' option').slice(1).remove();
+        $.each(data, function (index, value) {
             $(container).append(
                 $("<option>")
                     .addClass('capitalize')
                     .attr('value', value)
                     .text(value)
-            );
+                );
         });
     }
 };
