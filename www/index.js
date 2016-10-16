@@ -63,7 +63,7 @@ $(document).ready(function () {
                 DED5EGAMER.view.listarJogadores('#playerList');
             });
             $('#createPlayerFrm').on('reset', function (event) {
-                //event.preventDefault();
+                DED5EGAMER.view.listarJogadores('#playerList');
             });
         },
         // deviceready Event Handler

@@ -158,15 +158,16 @@ DED5EGAMER.view = {
             var celula1 = $('<a>')
                     .on('click', function (event) {
                         DED5EGAMER.controler.player.loadPlayer(value);
-                        $.mobile.navigate(DED5EGAMER.domains.progressoCriacaoPorPaginaDestino[DED5EGAMER.controler.player.thePlayer.progressoCriacao]);
+                        $.mobile.navigate(DED5EGAMER.domains.progressoCriacaoPorPaginaDestino[value.progressoCriacao]);
                     });
             $('<img>').attr('src', 'img/elfo-druida.jpg').appendTo(celula1);
             $(celula1).append($('<h2>').append(value.nome + ' ' + value.sobreNome));
             $(celula1).append($('<p>').append('Nível: ' + value.nivel));
-            if (DED5EGAMER.controler.player.thePlayer.progressoCriacao < 100) {
-                var progressbar = $('<div>').addClass('playerlistprogressbar').progressbar({value: DED5EGAMER.controler.player.thePlayer.progressoCriacao});
-                progressbar.find('.ui-progressbar-value').css({background: 'green'});
-                $(celula1).append(progressbar);
+            if (value.progressoCriacao < 100) {
+                var playerlistprogressbar = $('<div>').progressbar({value: value.progressoCriacao});
+                playerlistprogressbar.css({height: '0.7em'});
+                playerlistprogressbar.find('.ui-progressbar-value').css({background: 'green'});
+                $(celula1).append(playerlistprogressbar);
             } else {
                 $(celula1).append($('<p>').append( $('<span>').text('COMPLETO').css({padding: '1em', background: 'green', color: '#fff'}) ).wrapInner('<strong>'));
             }
