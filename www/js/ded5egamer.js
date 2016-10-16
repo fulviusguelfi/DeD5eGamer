@@ -8,9 +8,9 @@ DED5EGAMER.domains = {
         300: {nivel: 2, proficiencia: +2},
         900: {nivel: 3, proficiencia: +2}
     },
-    niveisConstrucaoPorPaginaDestino: {
-        10: '#create_palyer_10',
-        25: '#create_palyer_25'
+    progressoCriacaoPorPaginaDestino: {
+        10: '#playerPage',
+        25: '#playerPage'
     },
     classes: ['druida', 'paladino'],
     racas: ['elfo', 'anão'],
@@ -56,13 +56,13 @@ DED5EGAMER.model = {
         if (window.localStorage.getItem('DED5EGAMER.players') !== null) {
             DED5EGAMER.model.players = JSON.parse(window.localStorage.getItem('DED5EGAMER.players'));
         }
-    },
+    }
 };
 
 DED5EGAMER.model.data = {
     player: {
         id: 0,
-        nivelConstrucao: 0,
+        progressoCriacao: 0,
         nome: '',
         sobreNome: '',
         raca: '',
@@ -117,12 +117,14 @@ DED5EGAMER.controler.player = {
     },
     newPlayer: function () {
         DED5EGAMER.controler.player.thePlayer = Object.assign({}, DED5EGAMER.model.data.player);
-        DED5EGAMER.controler.player.thePlayer.nivelConstrucao = .01;
     },
     createPlayer: function () {
         DED5EGAMER.controler.player.thePlayer.id = DED5EGAMER.controler.getUniqueId();
+        DED5EGAMER.controler.player.updateInCreationPalyer(10);
+    },
+    updateInCreationPalyer: function (progresso) {
+        DED5EGAMER.controler.player.thePlayer.progressoCriacao = progresso;
         this.refreshPlayer(DED5EGAMER.controler.player.thePlayer);
-        DED5EGAMER.controler.player.thePlayer.nivelConstrucao = .10;
     },
     refreshPlayer: function () {
         DED5EGAMER.controler.player.thePlayer.nivel = DED5EGAMER.controler.player.nivelProficienciaPorExperiencia().nivel;
@@ -156,21 +158,18 @@ DED5EGAMER.view = {
             var celula1 = $('<a>')
                     .on('click', function (event) {
                         DED5EGAMER.controler.player.loadPlayer(value);
-                        var nivel = DED5EGAMER.controler.player.thePlayer.nivelConstrucao;
-                        var paginaPorNivel = DED5EGAMER.domains.niveisConstrucaoPorPaginaDestino;
-                        $.mobile.navigate(paginaPorNivel[nivel]);
-
+                        $.mobile.navigate(DED5EGAMER.domains.progressoCriacaoPorPaginaDestino[DED5EGAMER.controler.player.thePlayer.progressoCriacao]);
                     });
             $('<img>').attr('src', 'img/elfo-druida.jpg').appendTo(celula1);
             $(celula1).append($('<h2>').append(value.nome + ' ' + value.sobreNome));
             $(celula1).append($('<p>').append('Nível: ' + value.nivel));
-            $(celula1).append(
-                $('<div>').attr('id name', 'progresBarTo'+DED5EGAMER.controler.player.thePlayer.id).addClass('progressBar').append(
-                    $('<div>').attr('id name', 'barTo'+DED5EGAMER.controler.player.thePlayer.id).addClass('bar').append(
-                        $('<div>').attr('id name', 'labelBarTo'+DED5EGAMER.controler.player.thePlayer.id).addClass('labelBar')
-                    )
-                )
-            );
+            if (DED5EGAMER.controler.player.thePlayer.progressoCriacao < 100) {
+                var progressbar = $('<div>').addClass('playerlistprogressbar').progressbar({value: DED5EGAMER.controler.player.thePlayer.progressoCriacao});
+                progressbar.find('.ui-progressbar-value').css({background: 'green'});
+                $(celula1).append(progressbar);
+            } else {
+                $(celula1).append($('<p>').append( $('<span>').text('COMPLETO').css({padding: '1em', background: 'green', color: '#fff'}) ).wrapInner('<strong>'));
+            }
             linha.append(celula1);
 
             var celula2 = $('<a>').attr('data-icon', 'delete').attr('href', '#').click(event, function () {
@@ -181,6 +180,7 @@ DED5EGAMER.view = {
             $(container).append(linha);
         });
         $(container).listview('refresh');
+        $.mobile.navigate('#listPlayers');
     },
     listarRacas: function (container) {
         DED5EGAMER.view.listarParaSelect(DED5EGAMER.domains.racas, container);
@@ -198,11 +198,11 @@ DED5EGAMER.view = {
         $(container + ' option').slice(1).remove();
         $.each(data, function (index, value) {
             $(container).append(
-                $("<option>")
+                    $("<option>")
                     .addClass('capitalize')
                     .attr('value', value)
                     .text(value)
-                );
+                    );
         });
     }
 };

@@ -5,11 +5,15 @@
         <meta charset="utf-8">
         <meta name="viewport"
               content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css"/>
+        <link rel="stylesheet" href="css/jquery-ui.css">
         <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.css"/>
         <link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.css"/>
         <link rel="stylesheet" href="index.css"/>
+              
         <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
         <script type="text/javascript" src="js/ded5egamer.js"></script>
         <script type="text/javascript" src="index.js"></script>
@@ -29,10 +33,10 @@
 
         <div data-role="page" id="playerPage">
             <div data-role="header">
-                <h1>Criando Jogador</h1>
+                <h1>Vamos Jogar?</h1>
             </div>
-            <a id="editarJogadorBtn" href="#createPlayerPage"  class="ui-btn ui-corner-all ui-shadow ui-icon-check"
-               data-transition="slide-down">Editar Jogador</a>
+            <a id="editarJogadorBtn" href="#listPlayers"  class="ui-btn ui-corner-all ui-shadow ui-icon-check"
+               data-transition="slide-down">lista de Jogadores</a>
         </div>
         
         <div data-role="page" id="createPlayerPage">
@@ -44,28 +48,30 @@
                     <label for="select-racar">Raça</label>
                     <select required title="Selecione a Raça" name="select-raca" id="select-raca" data-placeholder="true"
                             data-mini="true">
-                        <option selected="selected" value="">Selecione a Raça</option>
+                        <option  value="">Selecione a Raça</option>
                     </select>
                     <label for="select-classe">Classe</label>
                     <select required title="Selecione a Classe" name="select-classe" id="select-classe" data-placeholder="true"
                             data-mini="true">
-                        <option selected="selected" value="">Selecione a Classe</option>
+                        <option  value="">Selecione a Classe</option>
                     </select>
                     <label for="nome-jogador">Nome</label>
                     <input required title="Nome do Jogador" type="text" id="nome-jogador" name="nome-jogador">
                     <label for="select-nome">ou selecione da lista abaixo</label>
                     <select title="Nomes Sugeridos" name="select-nome" id="select-nome" data-placeholder="true"
                             data-mini="true">
-                        <option selected="selected" value="">Nomes Sugeridos</option>
+                        <option  value="">Nomes Sugeridos</option>
                     </select>
                     <label for="sobreNome-jogador">Sobrenome</label>
                     <input required title="Nome do Jogador" type="text" id="sobreNome-jogador" name="nome-jogador">
                     <select title="Sobre Nomes Sugeridos" name="select-sobre-nome" id="select-sobre-nome" data-placeholder="true"
                             data-mini="true">
-                        <option selected="selected" value="">Sobre Nomes Sugeridos</option>
+                        <option value="">Sobre Nomes Sugeridos</option>
                     </select>
-                    <input type="submit" value="Continua...">
-                    <input type="reset" value="Cancelar">
+                    <fieldset class="ui-grid-a">
+                        <input class="ui-block-a" type="submit" value="Continua...">
+                        <input class="ui-block-b" type="reset" value="Cancelar">
+                    </fieldset>
                 </form>
             </div>
         </div>

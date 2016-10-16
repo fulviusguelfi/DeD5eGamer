@@ -32,13 +32,13 @@ $(document).ready(function () {
             document.addEventListener('deviceready', this.onDeviceReady, false);
             $("#criarJogadorBtn").on('click', function (event) {
                 DED5EGAMER.controler.player.newPlayer();
+                $('#createPlayerFrm').trigger("reset");
+                
             });
             $('#select-raca').on('change', function (event) {
                 DED5EGAMER.controler.player.thePlayer.raca = $("#select-raca option:selected").val();
-                $('#select-nome option');
-                $('#select-sobre-nome option').prop('selected', function () {
-                    return this.defaultSelected;
-                });
+                $('#select-nome option[value!=""]').remove();
+                $('#select-sobre-nome option[value!=""]').remove();
                 DED5EGAMER.view.listarNomes('#select-nome');
                 DED5EGAMER.view.listarSobreNomes('#select-sobre-nome');
             });
@@ -61,7 +61,6 @@ $(document).ready(function () {
                 event.preventDefault();
                 DED5EGAMER.controler.player.createPlayer();
                 DED5EGAMER.view.listarJogadores('#playerList');
-                $.mobile.navigate('#listPlayers');
             });
             $('#createPlayerFrm').on('reset', function (event) {
                 //event.preventDefault();
