@@ -33,7 +33,7 @@ $(document).ready(function () {
             $("#criarJogadorBtn").on('click', function (event) {
                 DED5EGAMER.controler.player.newPlayer();
                 $('#createPlayerFrm').trigger("reset");
-                
+
             });
             $('#select-raca').on('change', function (event) {
                 DED5EGAMER.controler.player.thePlayer.raca = $("#select-raca option:selected").val();
@@ -75,6 +75,12 @@ $(document).ready(function () {
             DED5EGAMER.view.listarRacas('#select-raca');
             DED5EGAMER.view.listarClasses('#select-classe');
             DED5EGAMER.view.listarJogadores('#playerList');
+            $(".sortable").sortable({
+                connectWith: ".connectedSortable"
+            }).disableSelection();
+            $("#accordion").accordion({
+                collapsible: true
+            });
         }
     };
 

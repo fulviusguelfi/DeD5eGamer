@@ -169,11 +169,11 @@ DED5EGAMER.view = {
                 playerlistprogressbar.find('.ui-progressbar-value').css({background: 'green'});
                 $(celula1).append(playerlistprogressbar);
             } else {
-                $(celula1).append($('<p>').append( $('<span>').text('COMPLETO').css({padding: '1em', background: 'green', color: '#fff'}) ).wrapInner('<strong>'));
+                $(celula1).append($('<p>').append( $('<span>').text('COMPLETO').addClass('greenLabel') ).wrapInner('<strong>'));
             }
             linha.append(celula1);
 
-            var celula2 = $('<a>').attr('data-icon', 'delete').attr('href', '#').click(event, function () {
+            var celula2 = $('<a>').attr('data-icon', 'delete').attr('href', '#').click(event, function (event) {
                 DED5EGAMER.model.removePlayer(value);
                 DED5EGAMER.view.listarJogadores(container);
             });

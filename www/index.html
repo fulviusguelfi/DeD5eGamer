@@ -5,13 +5,13 @@
         <meta charset="utf-8">
         <meta name="viewport"
               content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        
+
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css"/>
         <link rel="stylesheet" href="css/jquery-ui.css">
         <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.css"/>
         <link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.css"/>
         <link rel="stylesheet" href="index.css"/>
-              
+
         <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
@@ -37,8 +37,77 @@
             </div>
             <a id="editarJogadorBtn" href="#listPlayers"  class="ui-btn ui-corner-all ui-shadow ui-icon-check"
                data-transition="slide-down">Lista de Jogadores</a>
+            <a id="testeJogadorBtn" href="#attrPage"  class="ui-btn ui-corner-all ui-shadow ui-icon-check"
+               data-transition="slide-down">Teste</a>
         </div>
-        
+
+        <div data-role="page" id="attrPage">
+            <div data-role="header">
+                <h1>Atributos</h1>
+            </div>
+            <div data-role="main">
+                <div id="accordion">
+                    <h3>Modelo 1 - Atributos Fixos</h3>
+                    <div>
+                        <div class="parent">
+                            <ul class="leftList">
+                                <li>Força</li>
+                                <li>Destresa</li>
+                                <li>Constituição</li>
+                                <li>Item 4</li>
+                                <li>Item 5</li>
+                            </ul>
+
+                            <ul class="sortable rightList connectedSortable">
+                                <li class="ui-state-default">15</li>
+                                <li class="ui-state-default">14</li>
+                                <li class="ui-state-default">13</li>
+                                <li class="ui-state-default">12</li>
+                                <li class="ui-state-default">11</li>
+                            </ul>             
+                            <br style="clear:both">    
+                        </div>
+                    </div>
+                    <h3>Modelo 2 - Atributos por Pontos</h3>
+                    <div>
+                        
+                    </div>
+                    <h3>Modelo 3 - Atributos Gerados</h3>
+                    <div>
+                        <div class="parent">
+                            <ul class="leftList">
+                                <li>Força</li>
+                                <li>Destresa</li>
+                                <li>Constituição</li>
+                                <li>Item 4</li>
+                                <li>Item 5</li>
+                            </ul>
+
+                            <ul class="sortable rightList connectedSortable">
+                                <li class="ui-state-default">15</li>
+                                <li class="ui-state-default">14</li>
+                                <li class="ui-state-default">13</li>
+                                <li class="ui-state-default">12</li>
+                                <li class="ui-state-default">11</li>
+                            </ul>             
+                            <br style="clear:both">    
+                        </div>
+                    </div>
+                    <h3>Modelo 4 - Digite seus Atributos</h3>
+                    <div>
+                        
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+            <a id="editarJogadorBtn" href="#listPlayers"  class="ui-btn ui-corner-all ui-shadow ui-icon-check"
+               data-transition="slide-down">Lista de Jogadores</a>
+        </div>
+
         <div data-role="page" id="createPlayerPage">
             <div data-role="header">
                 <h1>Criando Jogador</h1>
@@ -68,10 +137,8 @@
                             data-mini="true">
                         <option value="">Sobre Nomes Sugeridos</option>
                     </select>
-                    <fieldset class="ui-grid-a">
-                        <input class="ui-block-a" type="submit" value="Continua...">
-                        <input class="ui-block-b" type="reset" value="Cancelar">
-                    </fieldset>
+                    <button class="ui-btn ui-btn-inline" type="submit">Continua...</button>
+                    <button class="ui-btn ui-btn-inline" type="reset">Cancelar</button>
                 </form>
             </div>
         </div>
