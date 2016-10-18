@@ -79,7 +79,9 @@ $(document).ready(function () {
                 connectWith: ".connectedSortable"
             }).disableSelection();
             $("#accordion").accordion({
-                collapsible: true
+                header: "h3",
+                collapsible: true,
+                autoHeight: true
             });
         }
     };

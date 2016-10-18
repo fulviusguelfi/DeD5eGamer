@@ -6,32 +6,41 @@ body{
 {
     text-transform: capitalize;
 }
+
 .greenLabel {
     padding: '1em'; 
     background: 'green';
     color: '#fff';
 }
 
-  .leftList {
+.leftList {
     border: 0.1em solid #eee;
-    width: auto;
     min-height: 2em;
     list-style-type: none;
     margin: 0;
     padding: 0.4em 0 0 0;
     float: left;
     margin-right: 0.9em;
-  }
-  
-  .leftList li {
+}
+
+.leftList li {
     border: 0.1em solid #eee;
     margin: 0 0.4em 0.4em 0.4em;
     padding: 0.4em;
     font-size: 1.2em;
     width: auto;
-  }
-  
-    .rightList {
+}
+
+.leftDiv {
+    border: 0.1em solid #eee;
+    min-height: 2em;
+    margin: 0;
+    padding: 0.4em 0 0 0;
+    float: left;
+    margin-right: 0.9em;
+}
+
+.rightList {
     border: 0.1em solid #eee;
     width: auto;
     min-height: 2em;
@@ -40,12 +49,26 @@ body{
     padding: 0.4em 0 0 0;
     float: right;
     margin-right: 0.9em;
-  }
-  
-  .rightList li {
+}
+
+.rightList li {
     margin: 0 0.4em 0.4em 0.4em;
     padding: 0.4em;
     font-size: 1.2em;
     width: 2em;
     text-align: center;
-  }
+}
+
+.rightDiv {
+    border: 0.1em solid #eee;
+    width: auto;
+    min-height: 2em;
+    margin: 0;
+    padding: 0.4em 0 0 0;
+    float: right;
+    margin-right: 0.9em;
+}
+
+.rightDiv h1 {
+ text-align: center;   
+}
