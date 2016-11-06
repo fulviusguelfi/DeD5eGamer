@@ -75,13 +75,15 @@ $(document).ready(function () {
             DED5EGAMER.view.listarRacas('#select-raca');
             DED5EGAMER.view.listarClasses('#select-classe');
             DED5EGAMER.view.listarJogadores('#playerList');
-            $(".attr-sortable").sortable({
-                connectWith: ".attr-connectedSortable"
-            }).disableSelection();
+            
             $("#attr-accordion").accordion({
                 collapsible: true,
                 autoHeight: true
             });
+            
+            $(".attr-sortable").sortable({
+                connectWith: ".attr-connectedSortable"
+            }).disableSelection();
         }
     };
 

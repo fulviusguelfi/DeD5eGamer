@@ -48,52 +48,9 @@
             </div>
             <div data-role="main">
                 <div id="attr-accordion">
-                    <h3>Modelo 1 - Atributos Fixos</h3>
+                    <h3>Modelo 1 - Atributos Valores Padrão</h3>
                     <div>
-                        <div class="parent">
-                            <ul class="leftList">
-                                <li>Força</li>
-                                <li>Destresa</li>
-                                <li>Constituição</li>
-                                <li>Item 4</li>
-                                <li>Item 5</li>
-                            </ul>
-                            <ul class="attr-sortable rightList attr-connectedSortable">
-                                <li class="ui-state-default">15</li>
-                                <li class="ui-state-default">14</li>
-                                <li class="ui-state-default">13</li>
-                                <li class="ui-state-default">12</li>
-                                <li class="ui-state-default">11</li>
-                            </ul>             
-                            <br style="clear:both">    
-                        </div>
-                    </div>
-                    <h3>Modelo 2 - Atributos por Pontos</h3>
-                    <div class="parent">
-                        <div class="leftDiv">
-                            <form>
-                                <label for="forca-spinner">Força</label>
-                                <input id="forca-spinner" name="forca-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="1" max="18">
-                                <label for="destresa-spinner">Destresa</label>
-                                <input id="destresa-spinner" name="destresa-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="1" max="18">
-                                <label for="constituicao-spinner">Constituição</label>
-                                <input id="constituicao-spinner" name="constituicao-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="1" max="18">
-                                <label for="inteligencia-spinner">Inteligência</label>
-                                <input id="inteligencia-spinner" name="inteligencia-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="1" max="18">
-                                <label for="sabedoria-spinner">Sabedoria</label>
-                                <input id="sabedoria-spinner" name="sabedoria-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="1" max="18">
-                                <label for="carisma-spinner">Carisma</label>
-                                <input id="carisma-spinner" name="carisma-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="1" max="18">
-                            </form>
-                        </div>
-                        <div class="rightDiv">
-                            <p>Pontos Restantes</p>
-                            <h1>28</h1>
-                        </div>
-                        <br style="clear:both">  
-                    </div>
-                    <h3>Modelo 3 - Atributos Gerados</h3>
-                    <div><button >Gerar Atributos</button>
+                        <p>Arraste os atributos para ordenar.</p>
                         <div class="parent">
                             <ul class="leftList">
                                 <li>Força</li>
@@ -104,37 +61,120 @@
                                 <li>Carisma</li>
                             </ul>
                             <ul class="attr-sortable rightList attr-connectedSortable">
-                                <li class="ui-state-default">15</li>
-                                <li class="ui-state-default">14</li>
-                                <li class="ui-state-default">13</li>
-                                <li class="ui-state-default">12</li>
-                                <li class="ui-state-default">11</li>
-                                <li class="ui-state-default">11</li>
+                                <li id="15" class="ui-state-default">15</li>
+                                <li id="14" class="ui-state-default">14</li>
+                                <li id="13" class="ui-state-default">13</li>
+                                <li id="12" class="ui-state-default">12</li>
+                                <li id="10" class="ui-state-default">10</li>
+                                <li id="8" class="ui-state-default">8</li>
                             </ul>             
+                            <br style="clear:both">    
+                        </div>
+                    </div>
+                    <h3>Modelo 2 - Atributos por Pontos</h3>
+                    <div class="parent">
+                        <div class="leftDiv">
+                            <form>
+                                <label for="forca-spinner">Força</label>
+                                <input class="spinner" data-index="0" id="forca-spinner" name="forca-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="8" max="15">
+                                <label for="destresa-spinner">Destresa</label>
+                                <input class="spinner" data-index="1" id="destresa-spinner" name="destresa-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="8" max="15">
+                                <label for="constituicao-spinner">Constituição</label>
+                                <input class="spinner" data-index="2" id="constituicao-spinner" name="constituicao-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="8" max="15">
+                                <label for="inteligencia-spinner">Inteligência</label>
+                                <input class="spinner" data-index="3" id="inteligencia-spinner" name="inteligencia-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="8" max="15">
+                                <label for="sabedoria-spinner">Sabedoria</label>
+                                <input class="spinner" data-index="4" id="sabedoria-spinner" name="sabedoria-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="8" max="15">
+                                <label for="carisma-spinner">Carisma</label>
+                                <input class="spinner" data-index="5" id="carisma-spinner" name="carisma-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="8" max="15">
+                            </form>
+                        </div>
+                        <div class="rightDiv">
+                            <p>Pontos Restantes</p>
+                            <h1 id="attributePoints">27</h1>
+                        </div>
+                        <br style="clear:both">
+                        <script>
+                            $(document).ready(function () {
+                                var custo = [0, 0, 0, 0, 0, 0];
+                                var custoTotal = 0;
+                                var valor = 27;
+                                var arrayObj = {8: 0, 9: 1, 10: 2, 11: 3, 12: 4, 13: 5, 14: 7, 15: 9};
+                                $('.spinner').on('change', function (event) {
+                                    var este = $(this);
+                                    var index = $(this).attr("data-index");
+                                    $.each(arrayObj, function (id, obj) {
+                                        if (id === este.val()) {
+                                            custo[index] = obj;
+                                        }
+                                    });
+                                    custoTotal = custo.reduce(function (prev, cur) {
+                                        return prev + cur;
+                                    });
+                                    $('#attributePoints').text(valor - custoTotal);
+                                });
+                            });
+                        </script>
+                    </div>
+                    <h3>Modelo 3 - Atributos Gerados</h3>
+                    <div>
+                        <button id="gerar_atributos" >Gerar Atributos</button>
+                        <button id="limpar_atributos" >Limpar Atributos</button>
+                        <div class="parent">
+                            <ul class="leftList">
+                                <li>Força</li>
+                                <li>Destresa</li>
+                                <li>Constituição</li>
+                                <li>Inteligência</li>
+                                <li>Sabedoria</li>
+                                <li>Carisma</li>
+                            </ul>
+                            <ul id="listSortable" class="attr-sortable rightList attr-connectedSortable"></ul>
+                            <script type="text/javascript">
+                                    $(document).ready(function () {
+                                        $("#limpar_atributos").on('click', function (event) {
+                                            $("#listSortable").empty();
+                                        });
+                                        
+                                        $("#gerar_atributos").on('click', function (event) {
+                                            //TODO este if não esta funcionando
+                                            if ($("#listSortable").text() === "") {
+                                                var arrObjSortable = DED5EGAMER.controler.gerarAtributos();
+                                                $(arrObjSortable).each(function (index, obj) {
+                                                    $("#listSortable").append(
+                                                            $("<li>").addClass("ui-state-default").attr("id", obj).text(obj));
+                                                });
+                                            }
+                                        });
+                                    });
+                                </script>
                             <br style="clear:both">    
                         </div>
                     </div>
                     <h3>Modelo 4 - Entre com seus Atributos</h3>
                     <div>
+                        <p>Role 4D6 some os 3 maiores valores para definir o valor de cada atributo</p>
                         <form>
                             <label for="forca-spinner">Força</label>
-                            <input id="forca-spinner" name="forca-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="1" max="18">
+                            <input id="forca-spinner" name="forca-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="3" max="18">
                             <label for="destresa-spinner">Destresa</label>
-                            <input id="destresa-spinner" name="destresa-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="1" max="18">
+                            <input id="destresa-spinner" name="destresa-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="3" max="18">
                             <label for="constituicao-spinner">Constituição</label>
-                            <input id="constituicao-spinner" name="constituicao-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="1" max="18">
+                            <input id="constituicao-spinner" name="constituicao-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="3" max="18">
                             <label for="inteligencia-spinner">Inteligência</label>
-                            <input id="inteligencia-spinner" name="inteligencia-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="1" max="18">
+                            <input id="inteligencia-spinner" name="inteligencia-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="3" max="18">
                             <label for="sabedoria-spinner">Sabedoria</label>
-                            <input id="sabedoria-spinner" name="sabedoria-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="1" max="18">
+                            <input id="sabedoria-spinner" name="sabedoria-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="3" max="18">
                             <label for="carisma-spinner">Carisma</label>
-                            <input id="carisma-spinner" name="carisma-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="1" max="18">
+                            <input id="carisma-spinner" name="carisma-spinner" data-mini="true" type="text" data-role="spinbox" value="8" min="3" max="18">
                         </form>
                     </div>
                 </div>
             </div>
-            <a id="editarJogadorBtn" href="#listPlayers"  class="ui-btn ui-corner-all ui-shadow ui-icon-check"
-               data-transition="slide-down">Lista de Jogadores</a>
+            <form id="createPlayerFrm" name="createPlayerFrm">
+                <button class="ui-btn ui-btn-inline" type="submit">Continua...</button>
+                <button class="ui-btn ui-btn-inline" type="reset">Cancelar</button>
+            </form>
         </div>
         <div data-role="page" id="createPlayerPage">
             <div data-role="header">

@@ -96,6 +96,21 @@ DED5EGAMER.model.data = {
 DED5EGAMER.controler = {
     getUniqueId: function () {
         return new Date().getTime() + ((Math.random() * new Date().getTime()) + 1);
+    },
+    rolarDado: function (faces) {
+        return Math.floor((Math.random() * faces) + 1);
+    },
+    gerarAtributos: function () {
+        var atributos = new Array(6);
+        for (var i = 0; i < atributos.length; i++) {
+            var dados = new Array(4);
+            for (var a = 0; a < dados.length; a++) {
+                dados[a] = DED5EGAMER.controler.rolarDado(6);
+            }
+            dados.sort(function(a, b){return b-a});
+            atributos[i] = dados[0] + dados[1] + dados[2];
+        }
+        return atributos;
     }
 };
 
@@ -169,7 +184,7 @@ DED5EGAMER.view = {
                 playerlistprogressbar.find('.ui-progressbar-value').css({background: 'green'});
                 $(celula1).append(playerlistprogressbar);
             } else {
-                $(celula1).append($('<p>').append( $('<span>').text('COMPLETO').addClass('greenLabel') ).wrapInner('<strong>'));
+                $(celula1).append($('<p>').append($('<span>').text('COMPLETO').addClass('greenLabel')).wrapInner('<strong>'));
             }
             linha.append(celula1);
 
